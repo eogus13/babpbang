@@ -1,0 +1,19 @@
+[
+  { "id": "menu_001", "restaurantId": "rest_001", "name": "참치회 정식", "price": 18000, "menuCategory": "정식", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_002", "restaurantId": "rest_001", "name": "연어 덮밥", "price": 13000, "menuCategory": "덮밥", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_003", "restaurantId": "rest_001", "name": "광어회 정식", "price": 20000, "menuCategory": "정식", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_004", "restaurantId": "rest_002", "name": "바지락 칼국수", "price": 9000, "menuCategory": "면류", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_005", "restaurantId": "rest_002", "name": "해물 칼국수", "price": 11000, "menuCategory": "면류", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_006", "restaurantId": "rest_002", "name": "만두국", "price": 8000, "menuCategory": "국물", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_007", "restaurantId": "rest_003", "name": "봉골레 파스타", "price": 14000, "menuCategory": "파스타", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_008", "restaurantId": "rest_003", "name": "까르보나라", "price": 15000, "menuCategory": "파스타", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_009", "restaurantId": "rest_003", "name": "마르게리타 피자", "price": 17000, "menuCategory": "피자", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_010", "restaurantId": "rest_004", "name": "삼계탕", "price": 16000, "menuCategory": "탕", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_011", "restaurantId": "rest_004", "name": "옻닭 삼계탕", "price": 18000, "menuCategory": "탕", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_012", "restaurantId": "rest_005", "name": "짜장면", "price": 7000, "menuCategory": "면류", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_013", "restaurantId": "rest_005", "name": "짬뽕", "price": 8000, "menuCategory": "면류", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_014", "restaurantId": "rest_005", "name": "탕수육 (소)", "price": 15000, "menuCategory": "요리", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_015", "restaurantId": "rest_006", "name": "클래식 버거 세트", "price": 9900, "menuCategory": "버거", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_016", "restaurantId": "rest_006", "name": "더블 치즈버거 세트", "price": 12900, "menuCategory": "버거", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" },
+  { "id": "menu_017", "restaurantId": "rest_006", "name": "치킨 버거 세트", "price": 10900, "menuCategory": "버거", "description": null, "imageUrl": null, "isAvailable": true, "createdAt": "2024-01-01T00:00:00.000Z" }
+]

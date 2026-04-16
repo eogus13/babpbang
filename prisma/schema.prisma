@@ -1,0 +1,171 @@
+// ============================================================
+// 밥빵 (BabBang) - Prisma Schema (PostgreSQL / Supabase)
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================================
+// ENUM 정의
+// ============================================================
+
+enum SelectionMode {
+  VOTE
+  LEADER
+}
+
+enum RoomStatus {
+  WAITING_ATTENDANCE
+  SELECTING_RESTAURANT
+  RESTAURANT_CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum AttendanceStatus {
+  PENDING
+  JOIN
+  SKIP
+}
+
+// ============================================================
+// 사용자 (User)
+// ============================================================
+model User {
+  id        String   @id @default(cuid())
+  deviceId  String   @unique
+  name      String
+  team      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ledRooms        Room[]           @relation("RoomLeader")
+  memberships     RoomMember[]
+  restaurantVotes RestaurantVote[]
+  menuSelections  MenuSelection[]
+}
+
+// ============================================================
+// 밥약속 방 (Room)
+// ============================================================
+model Room {
+  id            String        @id @default(cuid())
+  code          String        @unique
+  leaderId      String
+  mealTime      DateTime
+  selectionMode SelectionMode
+  status        RoomStatus    @default(WAITING_ATTENDANCE)
+  maxWalkMinutes Int          @default(10)
+  lat           Float?
+  lng           Float?
+  confirmedRestaurantId String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  leader              User             @relation("RoomLeader", fields: [leaderId], references: [id])
+  confirmedRestaurant Restaurant?      @relation("ConfirmedRoom", fields: [confirmedRestaurantId], references: [id])
+  members             RoomMember[]
+  restaurantVotes     RestaurantVote[]
+  menuSelections      MenuSelection[]
+}
+
+// ============================================================
+// 방 참여자 (RoomMember)
+// ============================================================
+model RoomMember {
+  id         String           @id @default(cuid())
+  roomId     String
+  userId     String
+  attendance AttendanceStatus @default(PENDING)
+  joinedAt   DateTime?
+  createdAt  DateTime         @default(now())
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+}
+
+// ============================================================
+// 식당 (Restaurant)
+// ============================================================
+model Restaurant {
+  id            String   @id @default(cuid())
+  externalId    String?  @unique
+  name          String
+  category      String
+  address       String
+  lat           Float
+  lng           Float
+  phone         String?
+  imageUrl      String?
+  businessHours String?
+  rating        Float    @default(0)
+  reviewCount   Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  menus           Menu[]
+  restaurantVotes RestaurantVote[]
+  confirmedRooms  Room[]           @relation("ConfirmedRoom")
+}
+
+// ============================================================
+// 메뉴 (Menu)
+// ============================================================
+model Menu {
+  id           String   @id @default(cuid())
+  restaurantId String
+  name         String
+  price        Int
+  menuCategory String?
+  description  String?
+  imageUrl     String?
+  isAvailable  Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  restaurant     Restaurant      @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  menuSelections MenuSelection[]
+}
+
+// ============================================================
+// 식당 투표 (RestaurantVote)
+// ============================================================
+model RestaurantVote {
+  id           String   @id @default(cuid())
+  roomId       String
+  userId       String
+  restaurantId String
+  createdAt    DateTime @default(now())
+
+  room       Room       @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+}
+
+// ============================================================
+// 메뉴 선택 (MenuSelection)
+// ============================================================
+model MenuSelection {
+  id        String   @id @default(cuid())
+  roomId    String
+  userId    String
+  menuId    String
+  createdAt DateTime @default(now())
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  menu Menu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId, menuId])
+}
